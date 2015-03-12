@@ -12,3 +12,6 @@ if [ -f /etc/bashrc ]; then
 fi
 LS_COLORS='di=0;35' ; export LS_COLORS
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
