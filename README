@@ -1,1 +1,2 @@
-git clone asdf
+git clone https://github.com/nullne/home.git ~/.vim_runtime
+
