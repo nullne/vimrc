@@ -1,6 +1,6 @@
 #!/bin/sh
 cd $(dirname "$0")
-ln -fs $(pwd)/vimrc ~/.vimrc
+ln -fs $(pwd)/ultimate.vim ~/.vimrc
 
 if [ ! -d ~/.vim_runtime/bundle/vundle ]; then
     rm -rf ~/.vim_runtime/bundle/*
