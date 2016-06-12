@@ -1,8 +1,8 @@
 ####快速配置
-	git clone https://github.com/nullne/vimrc.git ~/.vim_runtime
+	git clone https://github.com/nullne/vimrc.git ~/.vim
 	
 	# 安装基本版
-	~.vim_runtime/basic_install.sh
+	~.vim/basic_install.sh
 	
 	# 安装终极版
-	~/.vim_runtime/ultimate_install.sh
+	~/.vim/ultimate_install.sh

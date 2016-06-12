@@ -39,7 +39,8 @@ else
     set rtp+=$HOME/.vim/bundle/vundle/
 endif
 let g:vundle_default_git_proto = 'git'
-call vundle#rc()
+
+call vundle#rc('~/.vim/bundle')
 
 " let Vundle manage Vundle
 " required! 
@@ -47,39 +48,56 @@ Plugin 'gmarik/vundle'
 "}}}
 " Plugins {{{
 
-Plugin 'xitianfz/custom_vimconf'
+" auto complete while searching in vim {{{
 Plugin 'SearchComplete'
-Plugin 'AutoTag'
+" }}}
+" auto tag for ctags, but seems that i have not installed ctags {{{
+" Plugin 'AutoTag'
+" }}}
+" magic usage with %, extended for html, xml or languages alike {{{
 Plugin 'matchit.zip'
-Plugin 'scrooloose/nerdcommenter'
+" let loaded_matchit = 1
+" }}}
+" quick change, delete surroundings: cs'",ds"  {{{
 Plugin 'tpope/vim-surround'
+" }}}
+" powerful status line {{{
 Plugin 'Lokaltog/vim-powerline'
+" beta vertion stil
+" Plugin 'powerline/powerline'
+" }}}
+" PHP {{{
 Plugin '2072/PHP-Indenting-for-VIm'
-Plugin 'vim-scripts/nginx.vim'
-Plugin 'elzr/vim-json'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'SyntaxAttr.vim'
 Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'tpope/vim-unimpaired.git'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'The-NERD-Commenter'
-
+"PDV--phpDocumentor-for-Vim
+Plugin 'PDV--phpDocumentor-for-Vim'
+noremap <leader>cd :call PhpDocSingle()<CR>
+" }}}
+" highlight nginx conf {{{
+Plugin 'vim-scripts/nginx.vim'
+" }}}
+" nice formater for json {{{
+Plugin 'elzr/vim-json'
+" }}}
+" coffee script {{{
+Plugin 'kchmck/vim-coffee-script'
+" }}}
+" c++ {{{
+Plugin 'octol/vim-cpp-enhanced-highlight'
+" }}}
+" Plugin 'SyntaxAttr.vim'
+" Plugin 'Valloric/YouCompleteMe'
+" useless {{{
+" Plugin 'tpope/vim-unimpaired.git'
+" }}}
 " Comment{{{
 Plugin 'tComment'
  nnoremap // :TComment<CR>
  vnoremap // :TComment<CR>
+ vnoremap /? :TCommentBlock<CR>
 " }}}
-"PDV--phpDocumentor-for-Vim{{{
-Plugin 'PDV--phpDocumentor-for-Vim'
-noremap <leader>cd :call PhpDocSingle()<CR>
-"}}}
-"Conque-Shell{{{
-Plugin 'Conque-Shell'
-noremap <F3> :ConqueTerm bash
-"}}}
 "kien/ctrlp.vim{{{
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_user_command = "find %s -type f \! \\( -path '*/.svn/*' -or -path '*/.git/*' -or -name '*.rrd' -or -name '*.pyc' -or -name '*.pyo' \\)"
@@ -91,23 +109,23 @@ colo molokai
 let g:molokai_original = 1
 "}}}
 "Shougo/neocomplcache{{{
-Plugin 'Shougo/neocomplcache'
-set completeopt-=preview
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_caching_limit_file_size = 50000000
-let g:neocomplcache_min_syntax_length = 2 
-"<CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-"<TAB>: completion. NO USE with snipmate
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"<C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-Y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" Plugin 'Shougo/neocomplete.vim'
+" set completeopt-=preview
+" let g:neocomplcache_enable_at_startup = 1
+" let g:neocomplcache_enable_smart_case = 1
+" let g:neocomplcache_enable_camel_case_completion = 1
+" let g:neocomplcache_enable_underbar_completion = 1
+" let g:neocomplcache_caching_limit_file_size = 50000000
+" let g:neocomplcache_min_syntax_length = 2 
+" "<CR>: close popup and save indent.
+" inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" "<TAB>: completion. NO USE with snipmate
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" "<C-h>, <BS>: close popup and delete backword char.
+" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-Y>  neocomplcache#close_popup()
+" inoremap <expr><C-e>  neocomplcache#cancel_popup()
 "let g:neocomplcache_enable_auto_select = 1
 "}}}
 "scrooloose/nerdtree{{{
@@ -128,31 +146,41 @@ let g:syntastic_mode_map = { 'mode': 'active',
             \ 'passive_filetypes': ['python'] }
 "}}}
 "mattn/emmet-vim{{{
+" not working
 Plugin 'mattn/emmet-vim'
 let g:user_zen_settings = { 'lang': "zh-CN" }
 "}}}
-"taglist{{{
-Plugin 'taglist.vim'
-noremap <F3> :TlistToggle<cr>
+"taglist useless {{{
+" Plugin 'taglist.vim'
+" noremap <F3> :TlistToggle<cr>
 "}}}
-"tpope/vim-fugitive{{{
+"tpope/vim-fugitive  git things{{{
 Plugin 'tpope/vim-fugitive'
 noremap <leader>g :Gstatus<cr><c-w>_
 "}}}
 "Lokaltog/vim-easymotion"{{{
 Plugin 'Lokaltog/vim-easymotion'
+" let g:user_emmet_leader_key='<C-Z>'
 let g:EasyMotion_leader_key = ';'
 "}}}
-"klen/python-mode"{{{
+"klen/python-mode" bri {{{
 Plugin 'klen/python-mode'
+let g:pymode_rope_goto_definition_bind = "<C-]>"
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_lint_cwindow = 0
 let g:pymode_lint_ignore = "C901"
+let g:pymode_run_bind = '<leader>r'
+" highlight ColorColumn ctermbg=235 guibg=#2c2d27
 "}}}
 "fatih/vim-go"{{{
 Plugin 'fatih/vim-go'
+" let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 0
+let g:go_fmt_fail_silently = 0
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
 "}}}
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 "}}}
@@ -459,7 +487,7 @@ au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
 
 au FileType python highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-" au FileType python match OverLength /\%80v.\+/
+au FileType python highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 """"""""""""""""""""""""""""""
 " => C section
@@ -496,6 +524,7 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <leader>] <Plug>(go-def-vertical)
 au FileType go nmap <F12>     :GoFmt <CR>
 
 set foldmethod=syntax   "fold based on indent
@@ -509,6 +538,11 @@ autocmd BufWinEnter *.* silent loadview
 " => ActionScript section
 """""""""""""""""""""""""""""""
 au BufNewFile,BufRead *.as set filetype=actionscript
+
+""""""""""""""""""""""""""""""
+" => nginx section
+"""""""""""""""""""""""""""""""
+au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif 
 
 """"""""""""""""""""""""""""""
 " => Vim grep
