@@ -86,7 +86,13 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 " }}}
 " Plugin 'SyntaxAttr.vim'
-" Plugin 'Valloric/YouCompleteMe'
+" neocomplete {{{
+" disabled because dependency of vim with lua
+" Plugin 'Shougo/neocomplete.vim'
+" }}}
+" YouCompleteMe{{{
+Plugin 'Valloric/YouCompleteMe'
+" }}}
 " useless {{{
 " Plugin 'tpope/vim-unimpaired.git'
 " }}}
@@ -108,26 +114,6 @@ set t_Co=256
 colo molokai
 let g:molokai_original = 1
 "}}}
-"Shougo/neocomplcache{{{
-" Plugin 'Shougo/neocomplete.vim'
-" set completeopt-=preview
-" let g:neocomplcache_enable_at_startup = 1
-" let g:neocomplcache_enable_smart_case = 1
-" let g:neocomplcache_enable_camel_case_completion = 1
-" let g:neocomplcache_enable_underbar_completion = 1
-" let g:neocomplcache_caching_limit_file_size = 50000000
-" let g:neocomplcache_min_syntax_length = 2 
-" "<CR>: close popup and save indent.
-" inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" "<TAB>: completion. NO USE with snipmate
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" "<C-h>, <BS>: close popup and delete backword char.
-" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-" inoremap <expr><C-Y>  neocomplcache#close_popup()
-" inoremap <expr><C-e>  neocomplcache#cancel_popup()
-"let g:neocomplcache_enable_auto_select = 1
-"}}}
 "scrooloose/nerdtree{{{
 Plugin 'scrooloose/nerdtree'
 let g:NERDChristmasTree = 1
@@ -139,11 +125,18 @@ noremap <F2> :NERDTreeToggle<cr>
 "}}}
 "scrooloose/syntastic{{{
 Plugin 'scrooloose/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 "let g:syntastic_aggregate_errors = 1
 let g:syntastic_mode_map = { 'mode': 'active',
             \ 'active_filetypes': [],
-            \ 'passive_filetypes': ['python'] }
+            \ 'passive_filetypes': ['python', 'go'] }
 "}}}
 "mattn/emmet-vim{{{
 " not working
@@ -175,14 +168,17 @@ let g:pymode_run_bind = '<leader>r'
 "}}}
 "fatih/vim-go"{{{
 Plugin 'fatih/vim-go'
-" let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 0
 let g:go_fmt_fail_silently = 0
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:go_list_type = "quickfix"
+" let g:go_list_type = "quickfix"
 "}}}
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
+" tag bar {{{
+Plugin 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
+" }}}
+" Plugin 'nsf/gocode', {'rtp': 'vim/'}
 "}}}
 " End Vundle {{{
 filetype plugin indent on     " required!
@@ -200,17 +196,6 @@ endif
 " Custom Maps {{{
 noremap <leader>q <C-W>c
 noremap <leader>w :w!<cr>
-noremap <F4> <C-W>_
-inoremap <F4> <C-W>_
-noremap <F5> :make!<cr>
-noremap <leader>s :sh<cr>
-noremap \| :ls<cr>
-" Fast editing of the .vimrc
-if s:OS == 'windows'
-	map <leader>e :e! $VIM/_vimrc<cr>
-else
-	map <leader>e :e! ~/.vimrc<cr>
-endif
 vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('b')<CR>
 vnoremap <silent> gv :call VisualSearch('gv')<CR>
@@ -526,11 +511,12 @@ au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <leader>] <Plug>(go-def-vertical)
 au FileType go nmap <F12>     :GoFmt <CR>
+au FileType go nmap <F10>     :GoMetaLinter <CR>
 
 set foldmethod=syntax   "fold based on indent
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
+set foldlevel=3         "this is just what i use
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 
