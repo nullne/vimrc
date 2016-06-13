@@ -14,3 +14,8 @@
 		
 		cd ~/.vim/bundle/YouCompleteMe
 		./install.py  --racer-completer --gocode-completer         # 如果需要支持其他语言，查阅README文件
+	每一种语言的自动补全机制都不相同，需要特定的去进行补全。
+	- Go
+
+	dsf 
+	- Python
