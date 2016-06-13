@@ -2,9 +2,9 @@
 cd $(dirname "$0")
 ln -fs $(pwd)/ultimate.vim ~/.vimrc
 
-if [ ! -d ~/.vim_runtime/bundle/vundle ]; then
-    rm -rf ~/.vim_runtime/bundle/*
-    git clone git://github.com/gmarik/vundle.git ~/.vim_runtime/bundle/vundle
+if [ ! -d ~/.vim/bundle/vundle ]; then
+    rm -rf ~/.vim/bundle/*
+    git clone git://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 fi
 
 vim +BundleInstall! +qa

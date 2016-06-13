@@ -6,3 +6,11 @@
 	
 	# 安装终极版
 	~/.vim/ultimate_install.sh
+
+####注意
+- 自动补全
+
+	目前使用YCM，编译环境为mac os X，如果需要在其他平台使用，需要手动安装
+		
+		cd ~/.vim/bundle/YouCompleteMe
+		./install.py  --racer-completer --gocode-completer         # 如果需要支持其他语言，查阅README文件
