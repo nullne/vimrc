@@ -196,6 +196,9 @@ endif
 " Custom Maps {{{
 noremap <leader>q <C-W>c
 noremap <leader>w :w!<cr>
+" :W sudo saves the file 
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
 vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('b')<CR>
 vnoremap <silent> gv :call VisualSearch('gv')<CR>
@@ -206,6 +209,7 @@ map <leader>bb :cd ..<cr>
 " User Interface {{{
 " Set 7 lines to the curors - when moving vertical..
 set so=7
+set langmenu=en
 set wildmenu "Turn on WiLd menu
 set ruler "Always show current position
 set hid "Change buffer - without saving
