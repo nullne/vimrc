@@ -541,3 +541,6 @@ let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated'
 set grepprg=/bin/grep\ -nH
 "}}}
 " vim:fdm=marker
+
+" set current line highlight
+set cursorline
