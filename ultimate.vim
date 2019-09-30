@@ -173,7 +173,7 @@ Plugin 'tComment'
 " }}}
 "kien/ctrlp.vim{{{
 Plugin 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = "ra"
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_user_command = "find %s -type f \! \\( -path '*/.svn/*' -or -path '*/.git/*' -or -name '*.rrd' -or -name '*.pyc' -or -name '*.pyo' \\)"
 "}}}
@@ -238,9 +238,12 @@ let g:pymode_run_bind = '<leader>r'
 "fatih/vim-go"{{{
 Plugin 'fatih/vim-go'
 let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 0
+let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 0
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+"let g:go_version_warning = 0
 " let g:go_list_type = "quickfix"
 "}}}
 " tag bar {{{
@@ -612,4 +615,5 @@ set grepprg=/bin/grep\ -nH
 " vim:fdm=marker
 
 " set current line highlight
-set cursorline
+" set cursorline
+highlight CursorLineNR cterm=NONE
